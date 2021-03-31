@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld/>
+    <popup>
+      <template v-slot:title>
+          Это тайтл
+      </template>
+       <template v-slot:result>
+          Это резалт
+      </template>
+    </popup>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import popup from './components/Popup.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    popup
   }
 }
 </script>
