@@ -9,18 +9,21 @@
           Это резалт
       </template>
     </popup>
+    <Requests/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import popup from './components/Popup.vue'
+import Requests from './components/dataRequests.vue'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    popup
+    popup,
+    Requests
   }
 }
 </script>

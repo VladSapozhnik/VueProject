@@ -1,21 +1,30 @@
 <template>
   <div>
-      <transition name="component-fade" mode="out-in">
+    
         <div class="popup__trigger" @click="openPopup">Open Popup</div>
-        <div class="popup__wrapper" v-if="popupShow">
-            <div class="popup__title">
-                <slot name='title'></slot>
-            </div>
-                <div class="popup__close" v-on:click="closePopup">X</div>
-                <button class="popup__btn-counter" v-on:click="count++">Нажать</button>
-                <div class="popup__number-click">{{ count }}</div> 
-                <div @click='showResult = true'>Показать результаты</div>
-            <div class="popup__result" v-if="showResult">
-                <slot name='result'></slot> 
-            </div> 
-        </div>
-        <div class="shadow" v-on:click="closePopup" v-if="popupShow"></div>
-      </transition>
+        <transition name="popup">
+          <div class="popup__wrapper" v-if="popupShow">
+              <div class="popup__title">
+                  <slot name='title'></slot>
+              </div>
+                  <div class="popup__close" @click="closePopup">X</div>
+                  <transition name="counter-animation">
+                    <button class="popup__btn-counter" @click="count++">Нажать</button>
+                  </transition>
+                  <div class="popup__number-click">{{ count }}</div> 
+      
+                <div @click='showResult = !showResult'>Показать результаты</div>
+              <transition name="result-animation">
+                <div class="popup__result" v-if="showResult">
+                  <slot name='result'></slot>         
+                </div> 
+              </transition>
+          </div>
+        </transition>
+        <transition name="popup-animation">
+          <div class="shadow" v-on:click="closePopup" v-if="popupShow"></div>
+        </transition>
+
   </div>
 </template>
 
@@ -41,13 +50,42 @@ export default {
 }
 </script>
 
-<style scoped>
-.component-fade-enter-active, .component-fade-leave-active {
-  transition: opacity .3s ease;
+<style scoped lang='scss'>
+
+.popup-enter-active, .popup-leave-active {
+  transition: opacity .2s;
 }
-.component-fade-enter, .component-fade-leave-to {
+.popup-enter, .popup-leave-to{
   opacity: 0;
 }
+
+
+.result-animation-enter {
+  transform: translateX(150px);
+  opacity: 0;
+}
+
+.result-animation-enter-active {
+  transition: all 0.3s;
+}
+
+.result-animation-enter-to {
+  opacity: 1;
+  transform: rotateZ(5deg);
+}
+
+.result-animation-leave {
+  opacity: 1;
+}
+
+.result-animation-leave-active {
+  transition: all 0.3s;
+}
+
+.result-animation-leave-to {
+  opacity: 0;
+}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -87,6 +125,7 @@ a {
     border: none;
     border-radius: 10px;
     color: #fff;
+    outline: none;
 }
 
 .shadow {
@@ -114,6 +153,7 @@ a {
     align-items: center;
     margin: 0 auto;
     cursor: pointer;
+    outline: none; 
 }
 
 .popup__close {
