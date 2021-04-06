@@ -29,7 +29,13 @@ export default {
           this.visibleResult = this.requestResult.filter(item => item.value % 2 !== 0) //выводить нечетные числа, visibleResult новый массив куда мы кладем нечетные числа из массива requestResult
       },
       modMake: function () {
-          this.visibleResult = this.requestResult.map(item => item.value + 5)
+          console.log(this.requestResult)
+         console.log(this.visibleResult)
+          this.visibleResult = this.requestResult.map(item =>  {
+              return {...item,  title: item.title + '5'  }
+          })
+          console.log(this.requestResult)
+         console.log(this.visibleResult)
       },
       requestData: function () { // <-- функция для axios
         this.axios
