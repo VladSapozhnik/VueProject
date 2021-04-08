@@ -1,0 +1,51 @@
+{
+    "name": {
+        "id": 1,
+        "placeholder":"Введите имя",
+        "value":"Вася Пупкин"
+    },
+    "tel": {
+        "id": 2,
+        "placeholder": "Введите Телефон",
+        "value": "+380"
+    },
+    "email": {
+        "id": 3,
+        "placeholder": "Введите Email",
+        "value":""
+    },
+    "pets": [
+        {
+            "id": 1,
+            "value": "adsdd",
+            "checked": true,
+            "title": "dog"
+        },
+        {
+            "id": 2,
+            "value": "adsadsdd",
+            "checked": true,
+            "title": "dog2"
+        },
+        {
+            "id": 3,
+            "value": "adadsasdd",
+            "checked": false,
+            "title": "dog3"
+        },
+        {
+            "id": 4,
+            "value": "adadasdsdd",
+            "checked": false,
+            "title": "dog4"
+        }
+    ],
+    "age": {
+        "id": 5,
+        "value": "20"
+    },
+    "messageArea": {
+        "id": 6,
+        "value": "Что вы хотите написать?"
+    }
+}

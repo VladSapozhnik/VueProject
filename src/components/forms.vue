@@ -42,8 +42,8 @@ export default {
             name: '',
             tel: '',
             email: '',
-            pets: [],
-            age: '',
+            pets: ['dog'],
+            age: '18',
             messageArea: '',
           },
       }    
