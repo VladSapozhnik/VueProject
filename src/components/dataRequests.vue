@@ -18,7 +18,8 @@ export default {
   data: function() {
       return {
           requestResult: [], // пустой массив куда будем ложить данные
-          visibleResult: [] // пустой массив куда ложим измененный масив, что выше
+          visibleResult: [], // пустой массив куда ложим измененный масив, что выше
+          message: ''
       }    
   },
   methods: {
@@ -30,12 +31,12 @@ export default {
       },
       modMake: function () {
           console.log(this.requestResult)
-         console.log(this.visibleResult)
+          console.log(this.visibleResult)
           this.visibleResult = this.requestResult.map(item =>  {
-              return {...item,  title: item.title + '5'  }
+              return {...item,  title: item.title + ' - best'  }
           })
           console.log(this.requestResult)
-         console.log(this.visibleResult)
+          console.log(this.visibleResult)
       },
       requestData: function () { // <-- функция для axios
         this.axios

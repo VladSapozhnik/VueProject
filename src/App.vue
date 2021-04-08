@@ -10,6 +10,8 @@
       </template>
     </popup>
     <Requests/>
+    <hr>
+    <forms/>
   </div>
 </template>
 
@@ -17,13 +19,15 @@
 import HelloWorld from './components/HelloWorld.vue'
 import popup from './components/Popup.vue'
 import Requests from './components/dataRequests.vue'
+import forms from './components/forms.vue'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
     popup,
-    Requests
+    Requests,
+    forms
   }
 }
 </script>
