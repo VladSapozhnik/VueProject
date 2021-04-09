@@ -1,51 +1,71 @@
 {
-    "name": {
+    "name":{
         "id": 1,
         "placeholder":"Введите имя",
-        "value":"Вася Пупкин"
+        "value": "Вася Пупкин 228"
     },
-    "tel": {
+
+    "tel":{
         "id": 2,
-        "placeholder": "Введите Телефон",
+        "placeholder": "Введите Телефон Украины",
         "value": "+380"
     },
-    "email": {
+    "email":{
         "id": 3,
         "placeholder": "Введите Email",
-        "value":""
+        "value": "@gmail.com"
     },
     "pets": [
         {
-            "id": 1,
+            "id": 4,
             "value": "adsdd",
             "checked": true,
             "title": "dog"
         },
         {
-            "id": 2,
+            "id": 5,
             "value": "adsadsdd",
-            "checked": true,
+            "checked": false,
             "title": "dog2"
         },
         {
-            "id": 3,
+            "id": 6,
             "value": "adadsasdd",
             "checked": false,
             "title": "dog3"
         },
         {
-            "id": 4,
+            "id": 7,
             "value": "adadasdsdd",
             "checked": false,
             "title": "dog4"
         }
     ],
-    "age": {
-        "id": 5,
-        "value": "20"
-    },
-    "messageArea": {
-        "id": 6,
-        "value": "Что вы хотите написать?"
+    "age": [
+        {
+            "id": 8,
+            "value": false,
+            "title": "19"
+        },
+        {
+            "id": 9,
+            "value": false,
+            "title": "20"
+        },
+        {
+            "id": 10,
+            "value": false,
+            "title": "21"
+        },
+        {
+            "id": 11,
+            "value": true,
+            "title": "22"
+        }
+    ],
+    "messageArea": {   
+        "id": 12,
+        "value": "",
+        "placeholder": "Что вы хотите написать?"
     }
 }

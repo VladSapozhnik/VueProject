@@ -1,35 +1,31 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <!-- <HelloWorld />
     <popup>
-      <template v-slot:title>
-          Это тайтл
-      </template>
-       <template v-slot:result>
-          Это резалт
-      </template>
-    </popup>
-    <Requests/>
-    <hr>
-    <forms/>
+      <template v-slot:title> Это тайтл </template>
+      <template v-slot:result> Это резалт </template>
+    </popup> -->
+    <!-- <Requests /> -->
+    <!-- <hr /> -->
+    <forms />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import popup from './components/Popup.vue'
-import Requests from './components/dataRequests.vue'
-import forms from './components/forms.vue'
+// import HelloWorld from "./components/HelloWorld.vue";
+// import popup from "./components/Popup.vue";
+// import Requests from "./components/dataRequests.vue";
+import forms from "./components/forms.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld,
-    popup,
-    Requests,
-    forms
-  }
-}
+    // HelloWorld,
+    // popup,
+    // Requests,
+    forms,
+  },
+};
 </script>
 
 <style>
