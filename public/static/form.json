@@ -2,7 +2,7 @@
     "name":{
         "id": 1,
         "placeholder":"Введите имя",
-        "value": "Вася Пупкин 228"
+        "value": ""
     },
 
     "tel":{

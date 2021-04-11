@@ -2,12 +2,18 @@
   <div class="forms">
     <div v-if="!pending">
       <div class="form-inner">
+        <pre>{{ $v.personalForm.name.value }}</pre>
         <input
           v-model="personalForm.name.value"
           class="forms-text"
           :id="personalForm.name.id"
+          :class="{
+            'is-invalid': $v.personalForm.name.value.$error,
+            redInput: $v.personalForm.name.value.$error,
+          }"
           type="text"
           :placeholder="personalForm.name.placeholder"
+          @blur="$v.personalForm.name.value.$touch()"
         />
 
         <input
@@ -30,12 +36,7 @@
         <div class="radio-offer">
           <h3>Сколько вам лет?</h3>
           <label v-for="age in personalForm.age" :key="age.id">
-            <input
-              class="radio"
-              type="radio"
-              :id="age.id"
-              :value="age.value"
-            />
+            <input class="radio" type="radio" :id="age.id" :value="age.value" />
             <span>{{ age.title }}</span>
           </label>
         </div>
@@ -69,21 +70,24 @@
 </template>
 
 <script>
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   name: "forms",
   data: function () {
     return {
-      // formsRegistration: {
-      //   name: '',
-      //   tel: '',
-      //   email: '',
-      //   pets: ['dog'],
-      //   age: '18',
-      //   messageArea: '',
-      // },
       personalForm: {},
       pending: true,
     };
+  },
+  validations: {
+    personalForm: {
+      name: {
+        value: {
+          required,
+          minLength: minLength(4),
+        },
+      },
+    },
   },
   created: function () {
     this.axios.get("./static/form.json").then((response) => {
@@ -106,7 +110,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.redInput {
+  background-color: #ab5f61;
+  color: #fff;
+  &::placeholder {
+    color: #fff;
+  }
+  &:focus {
+    border: 1px solid #fff;
+  }
+}
+
+input:focus,
+input:active {
+  border: none;
+}
+
 .forms {
   max-width: 730px;
   min-height: 350px;

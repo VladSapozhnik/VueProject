@@ -13,7 +13,8 @@
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "vue": "^2.6.12",
-    "vue-axios": "^3.2.4"
+    "vue-axios": "^3.2.4",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.12",
