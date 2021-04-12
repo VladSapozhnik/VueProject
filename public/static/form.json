@@ -8,7 +8,7 @@
     "tel":{
         "id": 2,
         "placeholder": "Введите Телефон Украины",
-        "value": "+380"
+        "value": "380"
     },
     "email":{
         "id": 3,
@@ -18,51 +18,55 @@
     "pets": [
         {
             "id": 4,
-            "value": "adsdd",
+            "value": "Dog",
             "checked": true,
-            "title": "dog"
+            "title": "Dog"
         },
         {
             "id": 5,
-            "value": "adsadsdd",
+            "value": "Cat",
             "checked": false,
-            "title": "dog2"
+            "title": "Cat"
         },
         {
             "id": 6,
-            "value": "adadsasdd",
+            "value": "Mouse",
             "checked": false,
-            "title": "dog3"
+            "title": "Mouse"
         },
         {
             "id": 7,
-            "value": "adadasdsdd",
+            "value": "Fox",
             "checked": false,
-            "title": "dog4"
+            "title": "Fox"
         }
     ],
-    "age": [
-        {
-            "id": 8,
-            "value": false,
-            "title": "19"
-        },
-        {
-            "id": 9,
-            "value": false,
-            "title": "20"
-        },
-        {
-            "id": 10,
-            "value": false,
-            "title": "21"
-        },
-        {
-            "id": 11,
-            "value": true,
-            "title": "22"
-        }
-    ],
+    "age": {
+        "checked": 22,
+        "items": [
+            {
+                "id": 8,
+                "value": 19,
+                "title": "19"
+            },
+            {
+                "id": 9,
+                "value": 20,
+                "title": "20"
+            },
+            {
+                "id": 10,
+                "value": 21,
+                "title": "21"
+            },
+            {
+                "id": 11,
+                "value": 22,
+                "title": "22"
+            }
+        ]
+        
+    },
     "messageArea": {   
         "id": 12,
         "value": "",

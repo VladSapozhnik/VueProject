@@ -2,41 +2,81 @@
   <div class="forms">
     <div v-if="!pending">
       <div class="form-inner">
-        <pre>{{ $v.personalForm.name.value }}</pre>
-        <input
-          v-model="personalForm.name.value"
-          class="forms-text"
-          :id="personalForm.name.id"
-          :class="{
-            'is-invalid': $v.personalForm.name.value.$error,
-            redInput: $v.personalForm.name.value.$error,
-          }"
-          type="text"
-          :placeholder="personalForm.name.placeholder"
-          @blur="$v.personalForm.name.value.$touch()"
-        />
+        <div
+          class="form-group"
+          :class="{ 'form-group--error': $v.personalForm.name.value.$error }"
+        >
+          <input
+            v-model="$v.personalForm.name.value.$model"
+            class="forms-text"
+            :id="personalForm.name.id"
+            type="text"
+            :placeholder="personalForm.name.placeholder"
+          />
+        </div>
+        <div class="invalid-feedback">
+          <span class="error" v-if="!$v.personalForm.name.value.required && $v.personalForm.name.value.$dirty">
+            Поле, обязательное для заполнения
+          </span>
+          <span class="error" v-if="!$v.personalForm.name.value.minLength && $v.personalForm.name.value.$dirty">
+            Имя должно иметь не менее
+            {{ $v.personalForm.name.value.$params.minLength.min }} символа.
+          </span>
+        </div>
+        <div
+          class="form-group"
+          :class="{ 'form-group--error': $v.personalForm.tel.value.$error }"
+        >
+          <input
+            v-model="$v.personalForm.tel.value.$model"
+            class="forms-text"
+            :id="personalForm.tel.id"
+            type="tel"
+            :placeholder="personalForm.tel.placeholder"
+          />
+        </div>
+        <div class="error" v-if="!$v.personalForm.tel.value.required && $v.personalForm.tel.value.$dirty">
+          Поле, обязательное для заполнения
+        </div>
+        <div class="error" v-if="!$v.personalForm.tel.value.minLength && $v.personalForm.tel.value.$dirty">
+          Номер должен иметь не менее
+          {{ $v.personalForm.tel.value.$params.minLength.min }} символа.
+        </div>
+        <div class="error" v-if="!$v.personalForm.tel.value.numeric && $v.personalForm.tel.value.$dirty">
+          Можно вводить только цифры!
+        </div>
 
-        <input
-          v-model="personalForm.tel.value"
-          class="forms-text"
-          :id="personalForm.tel.id"
-          type="tel"
-          :placeholder="personalForm.tel.placeholder"
-        />
-
-        <input
-          v-model="personalForm.email.value"
-          class="forms-text"
-          type="email"
-          :id="personalForm.email.id"
-          name="email"
-          :placeholder="personalForm.email.placeholder"
-        />
+        <div
+          class="form-group"
+          :class="{ 'form-group--error': $v.personalForm.email.value.$error }"
+        >
+          <input
+            v-model="$v.personalForm.email.value.$model"
+            class="forms-text"
+            type="email"
+            :id="personalForm.email.id"
+            name="email"
+            :placeholder="personalForm.email.placeholder"
+          />
+          <div class="error" v-if="!$v.personalForm.email.value.required && $v.personalForm.email.value.$dirty">
+            Поле, обязательное для заполнения
+          </div>
+          <div class="error" v-if="!$v.personalForm.email.value.email && $v.personalForm.email.value.$dirty">
+            Введите корректный Email
+          </div>
+        </div>
 
         <div class="radio-offer">
           <h3>Сколько вам лет?</h3>
-          <label v-for="age in personalForm.age" :key="age.id">
-            <input class="radio" type="radio" :id="age.id" :value="age.value" />
+          <label v-for="age in personalForm.age.items" :key="age.id">
+            <input
+              class="radio"
+              type="radio"
+              :id="age.id"
+              name="age"
+              v-model="personalForm.age.checked"
+              :value="age.value"
+            />
             <span>{{ age.title }}</span>
           </label>
         </div>
@@ -56,13 +96,24 @@
           </div>
         </div>
       </div>
-      <div>
+      <div
+        :class="{
+          'form-group--error': $v.personalForm.messageArea.value.$error,
+        }"
+      >
         <h3>Комментарии</h3>
         <textarea
-          v-model="personalForm.messageArea.value"
+          v-model="$v.personalForm.messageArea.value.$model"
           :id="personalForm.messageArea.id"
           :placeholder="personalForm.messageArea.placeholder"
         ></textarea>
+      </div>
+      <div class="error" v-if="!$v.personalForm.messageArea.value.required && $v.personalForm.messageArea.value.$dirty">
+        Поле, обязательное для заполнения
+      </div>
+      <div class="error" v-if="!$v.personalForm.messageArea.value.minLength && $v.personalForm.messageArea.value.$dirty">
+        Имя должно иметь не менее
+        {{ $v.personalForm.messageArea.value.$params.minLength.min }} символа.
       </div>
     </div>
     <div v-if="pending">ПРЕЛОАДЕР</div>
@@ -70,7 +121,7 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "forms",
   data: function () {
@@ -84,7 +135,26 @@ export default {
       name: {
         value: {
           required,
-          minLength: minLength(4),
+          minLength: minLength(6),
+        },
+      },
+      tel: {
+        value: {
+          required,
+          minLength: minLength(11),
+        },
+      },
+      email: {
+        value: {
+          required,
+          minLength: minLength(6),
+          email,
+        },
+      },
+      messageArea: {
+        value: {
+          required,
+          minLength: minLength(8),
         },
       },
     },
@@ -100,31 +170,28 @@ export default {
   },
 
   watch: {
-    // formsRegistration: {
-    //   handler: function (val) {
-    //     console.log(val);
-    //   },
-    //   deep: true,
-    // },
+    personalForm: {
+      handler: function (val) {
+        console.log(val);
+        console.log(this.$v)
+      },
+      deep: true,
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.redInput {
-  background-color: #ab5f61;
-  color: #fff;
-  &::placeholder {
-    color: #fff;
-  }
-  &:focus {
-    border: 1px solid #fff;
-  }
+input {
+  outline: none;
+}
+.form-group--error {
+  outline: outline-color;
 }
 
-input:focus,
-input:active {
-  border: none;
+.error {
+  color: rgb(196, 56, 56);
+  padding-bottom: 5px;
 }
 
 .forms {
@@ -207,5 +274,6 @@ textarea {
   resize: none;
   padding: 10px;
   border-radius: 10px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 </style>
