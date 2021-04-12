@@ -7,7 +7,8 @@
     </popup> -->
     <!-- <Requests /> -->
     <!-- <hr /> -->
-    <forms />
+    <!-- <forms /> -->
+    <order/>
   </div>
 </template>
 
@@ -15,7 +16,8 @@
 // import HelloWorld from "./components/HelloWorld.vue";
 // import popup from "./components/Popup.vue";
 // import Requests from "./components/dataRequests.vue";
-import forms from "./components/forms.vue";
+/* import forms from "./components/forms.vue"; */
+import order from "./components/order.vue"
 
 export default {
   name: "App",
@@ -23,7 +25,8 @@ export default {
     // HelloWorld,
     // popup,
     // Requests,
-    forms,
+    /* forms, */
+    order
   },
 };
 </script>

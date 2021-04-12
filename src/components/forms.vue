@@ -14,14 +14,12 @@
             :placeholder="personalForm.name.placeholder"
           />
         </div>
-        <div class="invalid-feedback">
-          <span class="error" v-if="!$v.personalForm.name.value.required && $v.personalForm.name.value.$dirty">
-            Поле, обязательное для заполнения
-          </span>
-          <span class="error" v-if="!$v.personalForm.name.value.minLength && $v.personalForm.name.value.$dirty">
-            Имя должно иметь не менее
-            {{ $v.personalForm.name.value.$params.minLength.min }} символа.
-          </span>
+        <div class="error" v-if="!$v.personalForm.name.value.required && $v.personalForm.name.value.$dirty">
+          Поле, обязательное для заполнения
+        </div>
+        <div class="error" v-if="!$v.personalForm.name.value.minLength && $v.personalForm.name.value.$dirty">
+          Имя должно иметь не менее
+          {{ $v.personalForm.name.value.$params.minLength.min }} символа.
         </div>
         <div
           class="form-group"

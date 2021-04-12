@@ -1,0 +1,88 @@
+{
+    "surname": {
+        "id": 1,
+        "value": "",
+        "placeholder": "Фамилия",
+        "title": "Фамилия"
+    },
+    "name": {
+        "id": 2,
+        "value": "",
+        "placeholder": "Имя"
+    },
+    "patronymic": {
+        "id": 3,
+        "value": "",
+        "placeholder": "Отчество"
+    },
+    "address": {
+        "id": 4,
+        "value": "",
+        "placeholder": "Адрес"
+    },
+    "way": {
+        "checked": "NewMail",
+        "addressItems": [    
+            {
+                "id": 5,
+                "value": "NewMail",
+                "title": "Новая Почта"
+            },
+            {
+                "id": 6,
+                "value": "UkrMail",
+                "title": "Укр Почта"
+            },
+            {
+                "id": 7,
+                "value": "pickup",
+                "title": "Самовывоз"
+            }
+        ]
+    },
+    "newMail": {
+        "checked": "",
+        "addressItems": [    
+            {
+                "id": 8,
+                "value": "Poltava",
+                "title": "Poltava"
+            },
+            {
+                "id": 9,
+                "value": "Nikolaev",
+                "title": "Nikolaev"
+            },
+            {
+                "id": 10,
+                "value": "Odessa",
+                "title": "Odessa"
+            }
+        ]
+    },
+    "ukrMail": {
+        "checked": "",
+        "addressItems": [    
+            {
+                "id": 8,
+                "value": "Poltava-1",
+                "title": "Poltava-2"
+            },
+            {
+                "id": 9,
+                "value": "Nikolaev-2",
+                "title": "Nikolaev-2"
+            },
+            {
+                "id": 10,
+                "value": "Odessa-3",
+                "title": "Odessa-3"
+            }
+        ]
+    },
+    "pickup": {
+        "id": 11,
+        "value": "",
+        "placeholder": "Введите ваши данные"
+    }
+}
