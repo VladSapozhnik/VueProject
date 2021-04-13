@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <HelloWorld />
-    <popup>
+    <popup/>
       <template v-slot:title> Это тайтл </template>
       <template v-slot:result> Это резалт </template>
     </popup> -->
