@@ -225,7 +225,7 @@ export default {
         },
       ],
       orderData: {
-        surname: "",
+        surname: "asdasda",
         name: "",
         patronymic: "",
         address: "",
@@ -234,6 +234,7 @@ export default {
         ukrMail: "",
         orderDescription: "",
       },
+      formData: {}
     };
   },
   validations: {
@@ -267,20 +268,7 @@ export default {
       //   console.log(this.orderData);
       // }); */
       this.axios
-        .post("/asdasdasd", {
-          firstName: "Fred",
-          lastName: "Flintstone",
-          orderData: {
-            surname: "",
-            name: this.name.data,
-            patronymic: "",
-            address: "",
-            way: "",
-            newMail: "",
-            ukrMail: "",
-            orderDescription: "",
-          }
-        })
+        .post("/asdasdasd", this.formData)
         .then(function (response) {
           console.log(response);
         })
@@ -288,11 +276,46 @@ export default {
           console.log(error);
         });
     },
+    orderForms: function () {
+      this.orderData = []
+    }
   },
   watch: {
     orderData: {
-      handler: function (vue) {
-        console.log(vue);
+      handler: function (value) {  
+        if (value.way == 'NewMail') {
+          console.log('НОВАЯ ПОЧТА')
+          this.formData = {
+            devilereType:value.way,
+            postOffice:value.newMail,
+            surnameWay:value.surname,
+            nameWay:value.name,
+            patronymicWay:value.patronymic,
+            addressWay:value.address
+          }
+        }
+        else if (value.way == 'UkrMail') {
+          console.log('УКР ПОЧТА')
+          this.formData = {
+            devilereType:value.way,
+            postOffice:value.ukrMail,
+            surnameWay:value.surname,
+            nameWay:value.name,
+            patronymicWay:value.patronymic,
+            addressWay:value.address
+          }
+        }
+        else if (value.way == 'orderDescription') {
+          console.log('САМОВЫВОЗ')
+          this.formData = {
+            devilereType:value.way,           
+            comment:value.orderDescription,
+            surnameWay:value.surname,
+            nameWay:value.name,
+            patronymicWay:value.patronymic,
+            addressWay:value.address
+          }
+        }
       },
       deep: true,
     },
