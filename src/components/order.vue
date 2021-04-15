@@ -126,7 +126,7 @@
       </select>
     </div>
     <div v-if="this.orderData.way == 'UkrMail'">
-      <select class="order__forms-select" v-model="orderData.UkrMail">
+      <select class="order__forms-select" v-model="orderData.ukrMail">
         <option
           v-for="ukrMail in UkrMailDepartments"
           :value="ukrMail.value"
@@ -282,7 +282,7 @@ export default {
   },
   watch: {
     orderData: {
-      handler: function (value) {  
+      handler: function (value) { 
         if (value.way == 'NewMail') {
           console.log('НОВАЯ ПОЧТА')
           this.formData = {
@@ -314,6 +314,14 @@ export default {
             nameWay:value.name,
             patronymicWay:value.patronymic,
             addressWay:value.address
+          }
+        }
+        if (value.way == true) {
+          this.formData = {
+              surnameWay:value.surname,
+              nameWay:value.name,
+              patronymicWay:value.patronymic,
+              addressWay:value.address
           }
         }
       },
