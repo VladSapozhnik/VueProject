@@ -17,16 +17,14 @@
           class="error"
           v-if="
             !$v.orderData.surname.value.required &&
-            $v.orderData.surname.value.$dirty
-          "
+            $v.orderData.surname.value.$dirty"
         >
           Поле, обязательное для заполнения
         </div>
         <div
           class="error"
           v-if="
-            !$v.orderData.surname.value.minLength && orderData.surname.value
-          "
+            !$v.orderData.surname.value.minLength && orderData.surname.value"
         >
           Имя должно иметь не менее
           {{ $v.orderData.surname.value.$params.minLength.min }} символа.
@@ -46,8 +44,7 @@
         <div
           class="error"
           v-if="
-            !$v.orderData.name.value.required && $v.orderData.name.value.$dirty
-          "
+            !$v.orderData.name.value.required && $v.orderData.name.value.$dirty"
         >
           Поле, обязательное для заполнения
         </div>
@@ -74,8 +71,7 @@
           class="error"
           v-if="
             !$v.orderData.patronymic.value.required &&
-            $v.orderData.patronymic.value.$dirty
-          "
+            $v.orderData.patronymic.value.$dirty"
         >
           Поле, обязательное для заполнения
         </div>
@@ -83,8 +79,7 @@
           class="error"
           v-if="
             !$v.orderData.patronymic.value.minLength &&
-            orderData.patronymic.value
-          "
+            orderData.patronymic.value"
         >
           Имя должно иметь не менее
           {{ $v.orderData.patronymic.value.$params.minLength.min }} символа.
@@ -106,8 +101,7 @@
         class="error"
         v-if="
           !$v.orderData.address.value.required &&
-          $v.orderData.address.value.$dirty
-        "
+          $v.orderData.address.value.$dirty"
       >
         Поле, обязательное для заполнения
       </div>
@@ -122,17 +116,16 @@
     <div>
       <label v-for="ways in orderData.way.addressItems" :key="ways.id">
         <input
-          name="mail"
-          type="checkbox"
-          v-model="ways.checked"
+          name="ways"
+          type="radio"
+          :value="ways.value"
           :id="ways.id"
-          :checked="ways.checked"
+          v-model="orderData.way.checked"
         />
         {{ ways.title }}
       </label>
-      <div v-if="this.orderAddress == this.orderData.way.addressItems.checked">orderAddress</div>
     </div>
-    <div>
+    <div v-if="this.orderData.way.checked == 'NewMail'">
       <select class="order__forms-select">
         <option
           v-for="newMail in orderData.newMail.addressItems"
@@ -144,7 +137,7 @@
         </option>
       </select>
     </div>
-    <div>
+    <div v-if="this.orderData.way.checked == 'UkrMail'">
       <select class="order__forms-select">
         <option
           v-for="ukrMail in orderData.ukrMail.addressItems"
@@ -156,7 +149,7 @@
         </option>
       </select>
     </div>
-    <div :class="{ 'form-group--error': $v.orderData.pickup.value.$error }">
+    <div v-if="this.orderData.way.checked == 'Pickup'" :class="{ 'form-group--error': $v.orderData.pickup.value.$error }">
       <textarea
         v-model="$v.orderData.pickup.value.$model"
         :placeholder="orderData.pickup.placeholder"
@@ -167,8 +160,7 @@
         class="error"
         v-if="
           !$v.orderData.pickup.value.required &&
-          $v.orderData.pickup.value.$dirty
-        "
+          $v.orderData.pickup.value.$dirty"
       >
         Поле, обязательное для заполнения
       </div>
@@ -180,7 +172,7 @@
         {{ $v.orderData.pickup.value.$params.minLength.min }} символа.
       </div>
     </div>
-    <button class="order__forms-btn">Отправить</button>
+    <button :click="sendForms" class="order__forms-btn">Отправить</button>
   </div>
 </template>
 
@@ -190,11 +182,11 @@ export default {
   name: "order",
   data: function () {
     return {
-      orderAddress: false,
+      orderAddress: '',
       orderData: {
         surname: {
           id: 1,
-          value: "Hifffff",
+          value: "",
           placeholder: "Фамилия",
           title: "Фамилия",
         },
@@ -214,29 +206,27 @@ export default {
           placeholder: "Адрес",
         },
         way: {
+          checked: "NewMail",
           addressItems: [
             {
               id: 5,
-              value: "NewMaill",
+              value: "NewMail",
               title: "Новая Почта",
-              checked: true
             },
             {
               id: 6,
               value: "UkrMail",
               title: "Укр Почта",
-              checked: false
             },
             {
               id: 7,
-              value: "pickup",
+              value: "Pickup",
               title: "Самовывоз",
-              checked: false
             },
           ],
         },
         newMail: {
-          checked: "",
+          checked: "Poltava",
           addressItems: [
             {
               id: 8,
@@ -256,7 +246,7 @@ export default {
           ],
         },
         ukrMail: {
-          checked: "",
+          checked: "Poltava-1",
           addressItems: [
             {
               id: 8,
@@ -317,7 +307,11 @@ export default {
       },
     },
   },
-  methods: {},
+  methods: {
+    sendForms: function () {
+      console.log(this.orderAddress)
+    }
+  },
   watch: {
     orderData: {
       handler: function (vue) {
