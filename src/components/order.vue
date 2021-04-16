@@ -4,101 +4,101 @@
       <h3>ФИО</h3>
       <div
         class="form-group"
-        :class="{ 'form-group--error': $v.orderData.surname.$error }"
+        :class="{ 'form-group--error': $v.userData.surname.$error }"
       >
         <input
           class="order__forms-input"
           type="text"
-          v-model="$v.orderData.surname.$model"
+          v-model="$v.userData.surname.$model"
           placeholder="Введите фамилию"
         />
         <div
           class="error"
-          v-if="!$v.orderData.surname.required && $v.orderData.surname.$dirty"
+          v-if="!$v.userData.surname.required && $v.userData.surname.$dirty"
         >
           Поле, обязательное для заполнения
         </div>
         <div
           class="error"
-          v-if="!$v.orderData.surname.minLength && orderData.surname"
+          v-if="!$v.userData.surname.minLength && userData.surname"
         >
           Имя должно иметь не менее
-          {{ $v.orderData.surname.$params.minLength.min }} символа.
+          {{ $v.userData.surname.$params.minLength.min }} символа.
         </div>
       </div>
       <div
         class="form-group"
-        :class="{ 'form-group--error': $v.orderData.name.$error }"
+        :class="{ 'form-group--error': $v.userData.name.$error }"
       >
         <input
           class="order__forms-input"
           type="text"
-          v-model="$v.orderData.name.$model"
+          v-model="$v.userData.name.$model"
           placeholder="Введите имя"
         />
         <div
           class="error"
-          v-if="!$v.orderData.name.required && $v.orderData.name.$dirty"
+          v-if="!$v.userData.name.required && $v.userData.name.$dirty"
         >
           Поле, обязательное для заполнения
         </div>
         <div
           class="error"
-          v-if="!$v.orderData.name.minLength && orderData.name"
+          v-if="!$v.userData.name.minLength && userData.name"
         >
           Имя должно иметь не менее
-          {{ $v.orderData.name.$params.minLength.min }} символа.
+          {{ $v.userData.name.$params.minLength.min }} символа.
         </div>
       </div>
       <div
         class="form-group"
-        :class="{ 'form-group--error': $v.orderData.patronymic.$error }"
+        :class="{ 'form-group--error': $v.userData.patronymic.$error }"
       >
         <input
           class="order__forms-input"
           type="text"
-          v-model="$v.orderData.patronymic.$model"
+          v-model="$v.userData.patronymic.$model"
           placeholder="Отчество"
         />
         <div
           class="error"
           v-if="
-            !$v.orderData.patronymic.required && $v.orderData.patronymic.$dirty
+            !$v.userData.patronymic.required && $v.userData.patronymic.$dirty
           "
         >
           Поле, обязательное для заполнения
         </div>
         <div
           class="error"
-          v-if="!$v.orderData.patronymic.minLength && orderData.patronymic"
+          v-if="!$v.userData.patronymic.minLength && userData.patronymic"
         >
           Имя должно иметь не менее
-          {{ $v.orderData.patronymic.$params.minLength.min }} символа.
+          {{ $v.userData.patronymic.$params.minLength.min }} символа.
         </div>
       </div>
     </div>
     <div
       class="form-group"
-      :class="{ 'form-group--error': $v.orderData.address.$error }"
+      :class="{ 'form-group--error': $v.userData.address.$error }"
     >
       <input
         class="order__forms-input"
         type="text"
-        v-model="$v.orderData.address.$model"
+        v-model="$v.userData.address.$model"
         placeholder="address vvedite"
       />
       <div
         class="error"
-        v-if="!$v.orderData.address.required && $v.orderData.address.$dirty"
+        v-if="!$v.userData.address.required && $v.userData.address.$dirty"
       >
         Поле, обязательное для заполнения
       </div>
       <div
         class="error"
-        v-if="!$v.orderData.address.minLength && orderData.address"
+        v-if="!$v.userData.address.minLength && userData.address"
       >
         Имя должно иметь не менее
-        {{ $v.orderData.address.$params.minLength.min }} символа.
+        {{ $v.userData.address.$params.minLength.min }} символа.
       </div>
     </div>
     <div>
@@ -194,51 +194,53 @@ export default {
         {
           id: 8,
           value: "Poltava",
-          title: "Poltava",
+          title: "Отделение №1",
         },
         {
           id: 9,
           value: "Nikolaev",
-          title: "Nikolaev",
+          title: "Отделение №2",
         },
         {
           id: 10,
           value: "Odessa",
-          title: "Odessa",
+          title: "Отделение №3",
         },
       ],
       UkrMailDepartments: [
         {
           id: 8,
           value: "Poltava-1",
-          title: "Poltava-2",
+          title: "Отделение №1",
         },
         {
           id: 9,
           value: "Nikolaev-2",
-          title: "Nikolaev-2",
+          title: "Отделение №2",
         },
         {
           id: 10,
           value: "Odessa-3",
-          title: "Odessa-3",
+          title: "Отделение №3",
         },
       ],
       orderData: {
-        surname: "asdasda",
-        name: "",
-        patronymic: "",
-        address: "",
-        way: "UkrMail",
+        way: "",
         newMail: "",
         ukrMail: "",
         orderDescription: "",
       },
-      formData: {}
+      deliveryData: {},
+      userData: {
+        surname: "asdasda",
+        name: "",
+        patronymic: "",
+        address: "",
+      }
     };
   },
   validations: {
-    orderData: {
+    userData: {
       surname: {
         required,
         minLength: minLength(6),
@@ -255,6 +257,8 @@ export default {
         required,
         minLength: minLength(6),
       },
+    },
+    orderData: {
       orderDescription: {
         required,
         minLength: minLength(8),
@@ -268,7 +272,7 @@ export default {
       //   console.log(this.orderData);
       // }); */
       this.axios
-        .post("/asdasdasd", this.formData)
+        .post("/asdasdasd", Object.assign(this.deliveryData, this.userData))
         .then(function (response) {
           console.log(response);
         })
@@ -283,47 +287,34 @@ export default {
   watch: {
     orderData: {
       handler: function (value) { 
+  /*       Object.assign(this.orderData, this.userData) */
         if (value.way == 'NewMail') {
           console.log('НОВАЯ ПОЧТА')
-          this.formData = {
+          this.deliveryData = {
             devilereType:value.way,
             postOffice:value.newMail,
-            surnameWay:value.surname,
-            nameWay:value.name,
-            patronymicWay:value.patronymic,
-            addressWay:value.address
           }
         }
         else if (value.way == 'UkrMail') {
           console.log('УКР ПОЧТА')
-          this.formData = {
+          this.deliveryData = {
             devilereType:value.way,
             postOffice:value.ukrMail,
-            surnameWay:value.surname,
-            nameWay:value.name,
-            patronymicWay:value.patronymic,
-            addressWay:value.address
           }
         }
         else if (value.way == 'orderDescription') {
           console.log('САМОВЫВОЗ')
-          this.formData = {
+          this.deliveryData = {
             devilereType:value.way,           
             comment:value.orderDescription,
-            surnameWay:value.surname,
-            nameWay:value.name,
-            patronymicWay:value.patronymic,
-            addressWay:value.address
           }
         }
-        if (value.way == true) {
-          this.formData = {
-              surnameWay:value.surname,
-              nameWay:value.name,
-              patronymicWay:value.patronymic,
-              addressWay:value.address
-          }
-        }
+      },
+      deep: true,
+    },
+    userData: {
+      handler: function (valueData) {
+        console.log(valueData);
       },
       deep: true,
     },
