@@ -9,6 +9,7 @@
     <!-- <hr /> -->
     <!-- <forms /> -->
     <order/>
+    <kidsanna/>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
 // import Requests from "./components/dataRequests.vue";
 /* import forms from "./components/forms.vue"; */
 import order from "./components/order.vue"
+import kidsanna from "./components/kidsanna.vue"
 
 export default {
   name: "App",
@@ -26,7 +28,8 @@ export default {
     // popup,
     // Requests,
     /* forms, */
-    order
+    order,
+    kidsanna
   },
 };
 </script>
