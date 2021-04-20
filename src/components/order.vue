@@ -63,8 +63,7 @@
           />
           <div
             class="error"
-            v-if="
-              !$v.userData.patronymic.required && $v.userData.patronymic.$dirty"
+            v-if="!$v.userData.patronymic.required && $v.userData.patronymic.$dirty"
           >
             Поле, обязательное для заполнения
           </div>
@@ -113,8 +112,15 @@
           {{ ways.title }}
         </label>
       </div>
-      <div v-if="this.orderData.way == 'NewMail'">
-        <select class="order__forms-select" v-model="orderData.newMail">
+      <div
+        class="form-group"
+        v-if="this.orderData.way == 'NewMail'"
+        :class="{ 'form-group--error': $v.orderData.newMail.$error }"
+      >
+        <select
+          class="order__forms-select"
+          v-model="$v.orderData.newMail.$model"
+        >
           <option
             v-for="newMail in newPostDepartments"
             :value="newMail.value"
@@ -124,11 +130,23 @@
             {{ newMail.title }}
           </option>
         </select>
+        <div
+          class="error"
+          v-if="!$v.orderData.newMail.required && $v.orderData.newMail.$dirty"
+        >
+          Выберете отделение!
+        </div>
       </div>
-      <div v-if="this.orderData.way == 'UkrMail'">
-        <select class="order__forms-select" v-model="orderData.ukrMail">
+      <div
+        v-if="this.orderData.way == 'UkrMail'"
+        :class="{ 'form-group--error': $v.orderData.ukrMail.$error }"
+      >
+        <select
+          class="order__forms-select"
+          v-model="$v.orderData.ukrMail.$model"
+        >
           <option
-            v-for="ukrMail in UkrMailDepartments"
+            v-for="ukrMail in UkrPostDepartments"
             :value="ukrMail.value"
             :key="ukrMail.id"
             :id="ukrMail.id"
@@ -136,10 +154,14 @@
             {{ ukrMail.title }}
           </option>
         </select>
+        <div
+          class="error"
+          v-if="!$v.orderData.ukrMail.required && $v.orderData.ukrMail.$dirty"
+        >
+          Выберете отделение!
+        </div>
       </div>
-      <div
-        v-if="this.orderData.way == 'orderDescription'"
-      >
+      <div v-if="this.orderData.way == 'orderDescription'">
         <textarea
           v-model="orderData.orderDescription"
           placeholder="Напишите комментарий"
@@ -154,9 +176,7 @@
       >
         Отправить
       </button>
-      <p class="typo__p" v-if="submitStatus === 'OK'">
-        Спасибо за заявку!
-      </p>
+      <p class="typo__p" v-if="submitStatus === 'OK'">Спасибо за заявку!</p>
       <p class="typo__p" v-if="submitStatus === 'ERROR'">
         Пожалуйста, заполните форму правильно.
       </p>
@@ -171,6 +191,24 @@ export default {
   name: "order",
   data: function () {
     return {
+      userDataValidations: {
+        surname: {
+          required,
+          minLength: minLength(6),
+        },
+        name: {
+          required,
+          minLength: minLength(6),
+        },
+        patronymic: {
+          required,
+          minLength: minLength(6),
+        },
+        address: {
+          required,
+          minLength: minLength(6),
+        },
+      },
       submitStatus: null,
       deliveryTypes: [
         {
@@ -206,7 +244,7 @@ export default {
           title: "Отделение №3",
         },
       ],
-      UkrMailDepartments: [
+      UkrPostDepartments: [
         {
           id: 8,
           value: "branch №1",
@@ -238,50 +276,49 @@ export default {
       },
     };
   },
-  validations: {
-    userData: {
-      surname: {
-        required,
-        minLength: minLength(6),
-      },
-      name: {
-        required,
-        minLength: minLength(6),
-      },
-      patronymic: {
-        required,
-        minLength: minLength(6),
-      },
-      address: {
-        required,
-        minLength: minLength(6),
-      },
+  validations() {
+    if (this.orderData.way == "NewMail") {
+      return {
+        orderData: {
+          newMail: {
+            required,
+          },
+        },
+        userData: this.userDataValidations,
+      };
+    } else if (this.orderData.way == "UkrMail") {
+      return {
+        orderData: {
+          ukrMail: {
+            required,
+          },
+        },
+        userData: this.userDataValidations,
+      };
+    } else if (this.orderData.way == "orderDescription") {
+      return {
+        userData: this.userDataValidations,
+      };
     }
   },
   methods: {
     sendForms: function () {
-      //   /*     this.axios.get("http//").then((response) => {
-      //   this.orderData = response.data;
-      //   console.log(this.orderData);
-      // }); */
       this.axios
         .post("/request", Object.assign(this.deliveryData, this.userData))
-        .then(function (response) {
-          console.log(response);
+        .then(function () {
+     
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
+      
         });
     },
     orderForms: function () {
       this.orderData = [];
     },
     submit() {
-      console.log("submit!");
       this.$v.$touch();
       if (this.$v.$invalid) {
         this.submitStatus = "ERROR";
-        console.log(this)
       } else {
         // do your submit logic here
         this.submitStatus = "PENDING";
@@ -294,32 +331,22 @@ export default {
   watch: {
     orderData: {
       handler: function (value) {
-        /*       Object.assign(this.orderData, this.userData) */
         if (value.way == "NewMail") {
-          console.log("НОВАЯ ПОЧТА");
           this.deliveryData = {
             devilereType: value.way,
             postOffice: value.newMail,
           };
         } else if (value.way == "UkrMail") {
-          console.log("УКР ПОЧТА");
           this.deliveryData = {
             devilereType: value.way,
             postOffice: value.ukrMail,
           };
         } else if (value.way == "orderDescription") {
-          console.log("САМОВЫВОЗ");
           this.deliveryData = {
             devilereType: value.way,
             comment: value.orderDescription,
           };
         }
-      },
-      deep: true,
-    },
-    userData: {
-      handler: function (valueData) {
-        console.log(valueData);
       },
       deep: true,
     },
@@ -340,7 +367,7 @@ export default {
   box-sizing: border-box;
 }
 
-.error{
+.error {
   color: rgb(196, 56, 56);
   font-size: 11px;
 }
@@ -349,7 +376,6 @@ export default {
   color: rgb(196, 56, 56);
   font-size: 13px;
 }
-
 
 .order__forms {
   display: flex;
