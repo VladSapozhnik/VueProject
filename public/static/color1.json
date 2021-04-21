@@ -2,19 +2,30 @@
     "sneakers": [
         {
             "id": 1,
+            "title": "Тайтл",
             "src": "@/assets/images/1.jpg"
         },
         {
             "id": 2,
+            "title": "Тайтл2",
             "src": "@/assets/images/2.jpg"
         },
         {
             "id": 3,
+            "title": "Тайтл3",
             "src": "@/assets/images/3.jpg"
         },
         {
             "id": 4,
+            "title": "Тайтл4",
             "src": "@/assets/images/4.jpg"
         }
-    ]
+    ],
+    "presenceAvailable":{
+        "title": "Вналичии",
+        "class": "presence__head--available"
+    }, 
+    "presenceVendorCode": "Артикул: 12633",
+    "priceProduct": "42 999",
+    "productPriceDiscount": "40 999"
 }

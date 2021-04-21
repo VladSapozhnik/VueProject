@@ -1,30 +1,37 @@
 <template>
-  <div class="kidsanna">
-    <div class="container">
-        <div class="kidsanna__wrapper">
-            <VueSlickCarousel class="carusel-sneakers" :arrows="true">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            </VueSlickCarousel>
-            <div class="presence">
-                <div class="presence__head">
-                    <div class="presence__head-instock">Вналичии</div>
-                    <div class="presence__head-vendorcode">Артикул: 12633</div>
+    <div v-if="!pending">
+        <div class="kidsanna">
+            <div class="container">
+                <div class="kidsanna__wrapper">
+                    <VueSlickCarousel v-for="sneakers in colorData.sneakers" :key="sneakers.id" class="carusel-sneakers" :arrows="true">
+                        <div :id="sneakers.id">{{sneakers.title}}</div>
+                    </VueSlickCarousel>
+                    <div class="presence">
+                        <div class="presence__head">
+                            <div class="presence__head-instock" :class="colorData.presenceAvailable.class">{{colorData.presenceAvailable.title}}</div>
+                            <div class="presence__head-vendorcode">{{colorData.presenceVendorCode}}</div>
+                        </div>
+                        <div class="presence__price">
+                            <p class="presence__price-text--strike"><strike>{{colorData.priceProduct}}</strike><sub>грн</sub></p>
+                            <p class="presence__price-text">{{colorData.productPriceDiscount}}<sub>грн</sub></p>
+                        </div>
+                        <label v-for="colors in viewsColor" :key="colors.id">
+                            <input
+                            :class="colors.class"
+                            type="radio"
+                            :id="colors.id"
+                            name="age"
+                            v-model="selectedСolor"
+                            :value="colors.value"
+                            />
+                        </label>
+                        <button class="kidsanna__product-buy">Купить</button>
+                    </div>
                 </div>
-                <div class="presence__price">
-                    <p class="presence__price-text--strike"><strike>42 999грн</strike><sub>грн</sub></p>
-                    <p class="presence__price-text">40 999<sub>грн</sub></p>
-                </div>
-                <label>
-                    <input type="radio"/>
-                </label>
-                <button>Купить</button>
             </div>
         </div>
+        <div v-if="pending">ПРЕЛОАДЕР</div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -36,8 +43,45 @@ export default {
   name: "kidsanna",
   components: { VueSlickCarousel },
   data: function () {
-    return {
+    return {  
+        pending: "true",
+        selectedСolor: "colorRed",   
+        viewsColor: [
+            {
+            id: 1,
+            value: "colorRed",
+            "class": "presence__colors-red"
+            },
+            {
+            id: 2,
+            value: "colorGreen",
+            "class": "presence__colors-green"
+            },
+            {
+            id: 3,
+            value: "colorOrange",
+            "class": "presence__colors-orange"
+            },
+        ],
+        ColorData: {}
     };
+  },
+  methods: {
+  },
+  watch: {
+    selectedСolor: {
+      handler: function (val) {
+        console.log(val);
+      },
+      deep: true,
+    },
+  },
+  created: function () {
+    this.axios.get("./static/color1.json").then((response) => {
+      this.colorData = response.data;
+      this.pending = false;
+      console.log(this.colorData);
+    });
   },
 };
 </script>
@@ -45,8 +89,22 @@ export default {
 <style scoped lang='scss'>
 .kidsanna {
     &__wrapper {
-    display: flex;
-}
+        display: flex;
+    }
+    &__product-buy {
+        display: block;
+        width: 210px;
+        height: 50px;
+        margin: 20px auto 0;
+        background: #F04137;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 100%;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
 }
 
 .container {
@@ -78,9 +136,14 @@ export default {
         border-radius: 20px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        color: #00930F;
+        align-items: center;      
     } 
+    &__head--available {
+        color: #00930F;
+    }
+    &__head--not-available {
+        color: #930500;
+    }
     &__head-vendorcode {
         font-size: 14px;
         line-height: 120%;
@@ -106,6 +169,12 @@ export default {
                 font-size: 12px;
             }
         }
+    }
+    &__colors-red,
+    &__colors-green,
+    &__colors-orange {
+        width: 30px;
+        height: 30px;
     }
 }
 

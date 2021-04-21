@@ -8,7 +8,7 @@
     <!-- <Requests /> -->
     <!-- <hr /> -->
     <!-- <forms /> -->
-    <order/>
+    <!-- <order/> -->
     <kidsanna/>
   </div>
 </template>
@@ -18,7 +18,7 @@
 // import popup from "./components/Popup.vue";
 // import Requests from "./components/dataRequests.vue";
 /* import forms from "./components/forms.vue"; */
-import order from "./components/order.vue"
+/* import order from "./components/order.vue" */
 import kidsanna from "./components/kidsanna.vue"
 
 export default {
@@ -28,7 +28,7 @@ export default {
     // popup,
     // Requests,
     /* forms, */
-    order,
+/*     order, */
     kidsanna
   },
 };

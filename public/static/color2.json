@@ -1,0 +1,27 @@
+{
+    "sneakers": [
+        {
+            "id": 1,
+            "src": "@/assets/images/1.jpg"
+        },
+        {
+            "id": 2,
+            "src": "@/assets/images/2.jpg"
+        },
+        {
+            "id": 3,
+            "src": "@/assets/images/3.jpg"
+        },
+        {
+            "id": 4,
+            "src": "@/assets/images/4.jpg"
+        }
+    ],
+    "presenceAvailable":{
+        "title": "Вналичии",
+        "class": "presence__head--not-available"
+    }, 
+    "presenceVendorCode": "Артикул: 27683",
+    "priceProduct": "35 999",
+    "productPriceDiscount": "32 999"
+}
