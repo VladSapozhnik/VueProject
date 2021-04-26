@@ -3,8 +3,8 @@
         <div class="kidsanna">
             <div class="container">
                 <div class="kidsanna__wrapper">
-                    <VueSlickCarousel v-for="sneakers in colorData.sneakers" :key="sneakers.id" class="carusel-sneakers" :arrows="true">
-                        <div :id="sneakers.id">{{sneakers.title}}</div>
+                    <VueSlickCarousel class="carusel__sneakers" :arrows="true">
+                        <div v-for="sneakers in colorData.sneakers" :key="sneakers.id" :id="sneakers.id"><img class="carusel__sneakers--logo" v-bind:src="sneakers.img" alt=""></div>
                     </VueSlickCarousel>
                     <div class="presence">
                         <div class="presence__head">
@@ -25,7 +25,7 @@
                             :value="colors.value"
                             />
                         </label>
-                        <button class="kidsanna__product-buy">Купить</button>
+                        <button :class="colorData.kidsannaColorClass" class="kidsanna__product-buy">Купить</button>
                     </div>
                 </div>
             </div>
@@ -45,33 +45,52 @@ export default {
   data: function () {
     return {  
         pending: "true",
-        selectedСolor: "colorRed",   
+        selectedСolor: "ColorRed",   
         viewsColor: [
             {
             id: 1,
-            value: "colorRed",
-            "class": "presence__colors-red"
+            value: "ColorRed",
+            class: "presence__colors-red"
             },
             {
             id: 2,
-            value: "colorGreen",
-            "class": "presence__colors-green"
+            value: "ColorGreen",
+            class: "presence__colors-green"
             },
             {
             id: 3,
-            value: "colorOrange",
-            "class": "presence__colors-orange"
+            value: "ColorOrange",
+            class: "presence__colors-orange"
             },
         ],
-        ColorData: {}
+        colorData: {},
     };
-  },
-  methods: {
   },
   watch: {
     selectedСolor: {
       handler: function (val) {
-        console.log(val);
+        if (val == 'ColorRed') {
+            console.log(val)
+            this.axios.get("./static/color1.json").then((response) => {
+            this.colorData = response.data;
+            this.pending = false;
+            console.log(this.colorData);
+            });
+        } else if (val == 'ColorGreen') {
+            console.log(val)
+            this.axios.get("./static/color2.json").then((response) => {
+            this.colorData = response.data;
+            this.pending = false;
+            console.log(this.colorData);
+            });
+        } else if (val == 'ColorOrange') {
+            console.log(val)
+            this.axios.get("./static/color3.json").then((response) => {
+            this.colorData = response.data;
+            this.pending = false;
+            console.log(this.colorData);
+            });
+        }
       },
       deep: true,
     },
@@ -87,6 +106,9 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+input[type=radio] {
+    display: none;
+}
 .kidsanna {
     &__wrapper {
         display: flex;
@@ -96,7 +118,6 @@ export default {
         width: 210px;
         height: 50px;
         margin: 20px auto 0;
-        background: #F04137;
         border: none;
         border-radius: 30px;
         font-weight: bold;
@@ -104,6 +125,35 @@ export default {
         line-height: 100%;
         text-transform: uppercase;
         color: #FFFFFF;
+        transition: all .2s;
+    }
+
+    &__color-red {
+        background: red;
+        border: 1px solid transparent;
+        &:hover {
+            background-color: #fff;
+            border: 1px solid red;
+            color: red;
+        }
+    }
+
+    &__color-green {
+        background: green;
+        &:hover {
+            background-color: #fff;
+            border: 1px solid green;
+            color: green;
+        }
+    }
+
+    &__color-orange {
+        background: orange;
+        &:hover {
+            background-color: #fff;
+            border: 1px solid orange;
+            color: orange;
+        }
     }
 }
 
@@ -112,10 +162,19 @@ export default {
     margin: 0 auto;
 }
 
-.carusel-sneakers {
+.carusel__sneakers {
     width: 504px;
     height: 482px;
     background-color: #ccc;
+    margin-right: 20px;
+    &--logo {
+        object-fit: cover;
+        object-position: center;
+    }
+}
+button.slick-prev:before, 
+button.slick-next:before {
+    color: red !important;
 }
 .presence {
     width: 100%;
@@ -165,6 +224,7 @@ export default {
         }
             &--strike {
             color: #828282;
+            margin-right: 20px;
             sub {
                 font-size: 12px;
             }

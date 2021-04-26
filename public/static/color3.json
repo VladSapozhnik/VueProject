@@ -2,25 +2,30 @@
     "sneakers": [
         {
             "id": 1,
-            "src": "@/assets/images/1.jpg"
+            "title": "Тайтл10",
+            "img": "@/assets/images/1.png"
         },
         {
             "id": 2,
-            "src": "@/assets/images/2.jpg"
+            "title": "Тайтл11",
+            "img": "@/assets/images/2.png"
         },
         {
             "id": 3,
-            "src": "@/assets/images/3.jpg"
+            "title": "Тайтл12",
+            "img": "@/assets/images/3.png"
         },
         {
             "id": 4,
-            "src": "@/assets/images/4.jpg"
+            "title": "Тайтл13",
+            "img": "@/assets/images/4.png"
         }
     ],
     "presenceAvailable":{
         "title": "Вналичии",
         "class": "presence__head--available"
     }, 
+    "kidsannaColorClass": "kidsanna__color-orange",
     "presenceVendorCode": "Артикул: 17535",
     "priceProduct": "51 768",
     "productPriceDiscount": "48 555"
