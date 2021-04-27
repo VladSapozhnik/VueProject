@@ -2,23 +2,15 @@
     "sneakers": [
         {
             "id": 1,
-            "title": "Тайтл",
-            "img": "/images/1.png"
+            "img": "/images/red/1.jpg"
         },
         {
             "id": 2,
-            "title": "Тайтл2",
-            "img": "/images/2.png"
+            "img": "/images/red/2.jpg"
         },
         {
             "id": 3,
-            "title": "Тайтл3",
-            "img": "/images/3.png"
-        },
-        {
-            "id": 4,
-            "title": "Тайтл4",
-            "img": "/images/4.png"
+            "img": "/images/red/3.jpg"
         }
     ],
     "presenceAvailable":{

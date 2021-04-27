@@ -2,23 +2,15 @@
     "sneakers": [
         {
             "id": 1,
-            "title": "Тайтл5",
-            "img": "@/assets/images/1.png"
+            "img": "/images/green/1.jpg"
         },
         {
             "id": 2,
-            "title": "Тайтл6",
-            "img": "@/assets/images/2.png"
+            "img": "/images/green/2.jpg"
         },
         {
             "id": 3,
-            "title": "Тайтл7",
-            "img": "@/assets/images/3.png"
-        },
-        {
-            "id": 4,
-            "title": "Тайтл8",
-            "img": "@/assets/images/4.png"
+            "img": "/images/green/3.jpg"
         }
     ],
     "presenceAvailable":{
@@ -26,7 +18,7 @@
         "class": "presence__head--not-available"
     }, 
     "kidsannaColorClass": "kidsanna__color-green",
-    "presenceVendorCode": "Артикул: 27683",
+    "presenceVendorCode": "",
     "priceProduct": "35 999",
     "productPriceDiscount": "32 999"
 }
