@@ -19,6 +19,12 @@
     }, 
     "kidsannaColorClass": "kidsanna__color-green",
     "presenceVendorCode": "",
-    "priceProduct": "35 999",
-    "productPriceDiscount": "32 999"
+    "priceProduct": {
+        "value":"",
+        "productСurrency": ""
+    },
+    "productPriceDiscount": {
+        "value": "Нет в наличии",
+        "productСurrency": ""
+    } 
 }

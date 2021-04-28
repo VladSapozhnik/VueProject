@@ -14,8 +14,8 @@
                             <div class="presence__head-vendorcode">{{colorData.presenceVendorCode}}</div>
                         </div>
                         <div class="presence__price">
-                            <p class="presence__price-text--strike"><strike>{{colorData.priceProduct}}</strike><sub>грн</sub></p>
-                            <p class="presence__price-text">{{colorData.productPriceDiscount}}<sub>грн</sub></p>
+                            <p class="presence__price-text--strike"><strike>{{colorData.priceProduct.value}}</strike><sub>{{colorData.priceProduct.productСurrency}}</sub></p>
+                            <p class="presence__price-text">{{colorData.productPriceDiscount.value}}<sub>{{colorData.productPriceDiscount.productСurrency}}</sub></p>
                         </div>
                         <div class="presence__offer">
                             <h3 class="presence__offer-title">Цвет:</h3>
@@ -130,6 +130,7 @@ input[type="radio"] {
     box-sizing: border-box;
     position: relative;
     margin-left: 5px;
+    cursor: pointer;
     &:checked + &,
     &:checked + &,
     &:checked + & {
@@ -193,6 +194,7 @@ input[type="radio"] {
         text-transform: uppercase;
         color: #FFFFFF;
         transition: all .2s;
+        cursor: pointer;
     }
 
     &__color-red {
@@ -283,10 +285,11 @@ input[type="radio"] {
     }
     &--logo {
         object-fit: cover;
+        height: 500px;
     }
 }
 .presence {
-    width: 100%;
+    width: 50%;
     &__head {
     display: flex;
     justify-content: space-between;
@@ -294,8 +297,7 @@ input[type="radio"] {
     width: 100%;
     }
     &__head-instock {
-        width: 97px;
-        height: 30px;
+        padding: 5px 15px;
         font-weight: normal;
         font-size: 14px;
         line-height: 120%;
@@ -345,6 +347,19 @@ input[type="radio"] {
         width: 30px;
         height: 30px;
     }
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 1;
+
+  opacity: 0.75;
+  color: rgb(0, 0, 0) !important;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 </style>

@@ -19,6 +19,12 @@
     }, 
     "kidsannaColorClass": "kidsanna__color-red",
     "presenceVendorCode": "Артикул: 12633",
-    "priceProduct": "42 999",
-    "productPriceDiscount": "40 999"
+    "priceProduct": {
+        "value":"42 999",
+        "productСurrency": "грн"
+    },
+    "productPriceDiscount": {
+        "value": "40 999",
+        "productСurrency": "грн"
+    } 
 }
