@@ -1,0 +1,20 @@
+{
+    "selectedСolor": "ColorRed",   
+    "viewsColor": [
+        {
+        "id": 1,
+        "value": "ColorRed",
+        "color": "#DD292E"
+        },
+        {
+        "id": 2,
+        "value": "ColorGreen",
+        "color": "#2BA401"
+        },
+        {
+        "id": 3,
+        "value": "ColorOrange",
+        "color": "#FFB13C"
+        }
+    ]
+}

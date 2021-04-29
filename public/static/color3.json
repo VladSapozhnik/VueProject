@@ -1,5 +1,5 @@
 {
-    "sneakers": [
+    "productItems": [
         {
             "id": 1,
             "img": "/images/orange/1.jpg"
@@ -13,12 +13,8 @@
             "img": "/images/orange/3.jpg"
         }
     ],
-    "presenceAvailable":{
-        "title": "Вналичии",
-        "class": "presence__head--available"
-    }, 
-    "kidsannaColorClass": "kidsanna__color-orange",
-    "presenceVendorCode": "Артикул: 17535",
+    "status": "В наличии", 
+    "vendorCode": "17535",
     "priceProduct": {
         "value":"",
         "productСurrency": ""

@@ -1,30 +1,23 @@
 {
-    "sneakers": [
+    "productItems": [
         {
-            "id": 1,
             "img": "/images/green/1.jpg"
         },
         {
-            "id": 2,
             "img": "/images/green/2.jpg"
         },
         {
-            "id": 3,
             "img": "/images/green/3.jpg"
         }
     ],
-    "presenceAvailable":{
-        "title": "Нет вналичии",
-        "class": "presence__head--not-available"
-    }, 
-    "kidsannaColorClass": "kidsanna__color-green",
-    "presenceVendorCode": "",
+    "status": "Нет вналичии",
+    "vendorCode": "27683",
     "priceProduct": {
         "value":"",
-        "productСurrency": ""
+        "currency": ""
     },
     "productPriceDiscount": {
         "value": "Нет в наличии",
-        "productСurrency": ""
-    } 
+        "currency": ""
+    }
 }
