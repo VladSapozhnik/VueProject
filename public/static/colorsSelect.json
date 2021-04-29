@@ -1,6 +1,6 @@
 {
     "selectedСolor": "ColorRed",   
-    "viewsColor": [
+    "selectColors": [
         {
         "id": 1,
         "value": "ColorRed",

@@ -19,17 +19,17 @@
                         </div>
                         <div class="info__offer">
                             <h3 class="info__offer-title">Цвет:</h3>
-                            <label v-for="colors in viewsColor" :key="colors.id">
+                            <label v-for="colorItem in selectColors" :key="colorItem.id">
                                 <input
-                                class="colors__select"
-                                type="radio"
-                                name="age"
-                                :id="colors.id"
-                                v-model="selectedСolor"
-                                :value="colors.value"
-                                @change="request(colors.id)"
+                                    type="radio"
+                                    name="color"
+                                    class="colors__item"
+                                    :id="colorItem.id"
+                                    v-model="selectedСolor"
+                                    :value="colorItem.value"
+                                    @change="request(colorItem.id)"
                                 />
-                                <span class="colors__select" :style="{ backgroundColor: colors.color }"></span>
+                                <span class="colors__item" :style="{ backgroundColor: colorItem.color }"></span>
                             </label>
                         </div>
                         <button class="kidsanna__buy">Купить</button>
@@ -56,21 +56,21 @@ export default {
         },
         pending: "true",
         selectedСolor: "ColorRed",   
-        viewsColor: [
+        selectColors: [
             {
             id: 1,
             value: "ColorRed",
-            color: '#DD292E'
+            color: "#DD292E"
             },
             {
             id: 2,
             value: "ColorGreen",
-            color: '#2BA401'
+            color: "#2BA401"
             },
             {
             id: 3,
             value: "ColorOrange",
-            color: '#FFB13C'
+            color: "#FFB13C"
             },
         ],
         colorData: {},
@@ -85,7 +85,13 @@ export default {
             });
     }
   },
-  created: function () {
+  created: function () {  
+/*     this.axios.get("./static/colorsSelect.json").then((response) => {
+      this.colorData = response.data;
+      this.pending = false;
+      console.log(this.colorData);
+    });   */
+    
     this.axios.get("./static/color1.json").then((response) => {
       this.colorData = response.data;
       this.pending = false;
@@ -122,7 +128,7 @@ input[type="radio"] {
     display: none;
     
 }
-.colors__select {
+.colors__item {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -131,8 +137,6 @@ input[type="radio"] {
     position: relative;
     cursor: pointer;
     margin-right: 5px;
-    &:checked + &,
-    &:checked + &,
     &:checked + & {
         width: 30px;
         height: 30px;
@@ -221,13 +225,6 @@ input[type="radio"] {
         line-height: 120%;
         color: #595959;     
     } 
-    
-    &__colors-red,
-    &__colors-green,
-    &__colors-orange {
-        width: 30px;
-        height: 30px;
-    }
 
     &__offer {
         display: block;
@@ -291,23 +288,25 @@ input[type="radio"] {
     width: 31px;
     height: 32px;
     display: block;
-    content: '';
-    background-image: url('../../src/assets/images/arrow-right.svg');
+    content: url('../../src/assets/images/arrow-right.svg');
     font-family: 'Roboto', sans-serif;
     background: #F5F5F5;
     opacity: 0.5;
     border-radius: 20px 0px 0px 20px;
+    padding: 7px 0 0px 5px;
+    box-sizing: border-box;
 }
 .slick-prev::before {
     width: 31px;
     height: 32px;
     display: block;
-    content: '';
-    background-image: url('../../src/assets/images/arrow-right.svg');
+    content: url('../../src/assets/images/arrow-left.svg');
     font-family: 'Roboto', sans-serif;
     background: #F5F5F5;
     opacity: 0.5;
     border-radius: 0px 20px 20px 0px;
+    padding: 7px 0 0px 0px;
+    box-sizing: border-box;
 }
 .slick-next {
     right: 10px;
