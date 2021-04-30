@@ -4,28 +4,28 @@
             <div class="container">
                 <div class="kidsanna__wrapper">
                     <VueSlickCarousel class="carusel__items" v-bind="settings">
-                        <div class="carusel__item" v-for="productItem in colorData.productItems" :key="productItem.id">
+                        <div class="carusel__item" v-for="productItem in productData.productItems" :key="productItem.id">
                             <img class="carusel__item-logo" :src="productItem.img" alt="">
                         </div>
                     </VueSlickCarousel>
                     <div class="info">
                         <div class="info__head">
-                            <div class="info__head-instock" :class="{'not-in-stock': colorData.status !== 'В наличии' }">{{colorData.status}}</div>
-                            <div class="info__head-vendorcode">Артикул: {{colorData.vendorCode}}</div>
+                            <div class="info__head-instock" :class="{'not-in-stock': productData.status !== 'В наличии' }">{{productData.status}}</div>
+                            <div class="info__head-vendorcode">Артикул: {{productData.vendorCode}}</div>
                         </div>
                         <div class="price">
-                            <p class="price__text--strike"><strike>{{colorData.priceProduct.value}}</strike><sub>{{colorData.priceProduct.currency}}</sub></p>
-                            <p class="price__text">{{colorData.productPriceDiscount.value}}<sub>{{colorData.productPriceDiscount.currency}}</sub></p>
+                            <p class="price__text--strike"><strike>{{productData.priceProduct.value}}</strike><sub>{{productData.priceProduct.currency}}</sub></p>
+                            <p class="price__text">{{productData.productPriceDiscount.value}}<sub>{{productData.productPriceDiscount.currency}}</sub></p>
                         </div>
                         <div class="info__offer">
                             <h3 class="info__offer-title">Цвет:</h3>
-                            <label v-for="colorItem in selectColors" :key="colorItem.id">
+                            <label v-for="colorItem in selectionData.selectColors" :key="colorItem.id">
                                 <input
                                     type="radio"
                                     name="color"
                                     class="colors__item"
                                     :id="colorItem.id"
-                                    v-model="selectedСolor"
+                                    v-model="selectionData.selectedСolor"
                                     :value="colorItem.value"
                                     @change="request(colorItem.id)"
                                 />
@@ -55,48 +55,41 @@ export default {
             arrows: true,
         },
         pending: "true",
-        selectedСolor: "ColorRed",   
-        selectColors: [
-            {
-            id: 1,
-            value: "ColorRed",
-            color: "#DD292E"
-            },
-            {
-            id: 2,
-            value: "ColorGreen",
-            color: "#2BA401"
-            },
-            {
-            id: 3,
-            value: "ColorOrange",
-            color: "#FFB13C"
-            },
-        ],
-        colorData: {},
+        productData: {},
+        selectionData: {}
     };
   },
   methods: {
     request: function(colorId){
-            this.axios.get("./static/color"+colorId+".json")
-            .then((response) => {
-                this.colorData = response.data;
-                this.pending = false;
-            });
+        this.axios.get("./static/color"+colorId+".json")
+        .then((response) => {
+            this.productData = response.data;
+            this.pending = false;
+        });
     }
   },
   created: function () {  
 /*     this.axios.get("./static/colorsSelect.json").then((response) => {
-      this.colorData = response.data;
-      this.pending = false;
-      console.log(this.colorData);
-    });   */
-    
-    this.axios.get("./static/color1.json").then((response) => {
-      this.colorData = response.data;
-      this.pending = false;
-      console.log(this.colorData);
+        this.selectionData = response.data;
+        this.pending = false;
+        console.log(this.selectionData);
     });
+    this.axios.get("./static/color1.json").then((response) => {
+        this.productData = response.data;
+        this.pending = false;
+        console.log(this.productData);
+    }); */
+    this.axios.all([
+        this.axios.get('./static/color1.json'),
+        this.axios.get('./static/colorsSelect.json')
+    ])
+    .then(this.axios.spread((responses, responseSelection) => {
+        this.productData = responses.data
+        this.selectionData = responseSelection.data
+        this.pending = false;
+        console.log(this.productData)
+        console.log(this.selectionData)
+    }))
   },
 };
 </script>
