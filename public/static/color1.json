@@ -14,10 +14,10 @@
     "vendorCode": "12633",
     "priceProduct": {
         "value":"42 999",
-        "currency": "грн"
+        "currency": "грн."
     },
     "productPriceDiscount": {
         "value": "40 999",
-        "currency": "грн"
+        "currency": "грн."
     } 
 }

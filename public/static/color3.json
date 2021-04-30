@@ -20,7 +20,7 @@
         "productСurrency": ""
     },
     "productPriceDiscount": {
-        "value": "51 768",
-        "productСurrency": "грн"
-    }   
+        "value": "51 729",
+        "currency": "грн."
+    }  
 }

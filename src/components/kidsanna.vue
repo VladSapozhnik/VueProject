@@ -14,8 +14,8 @@
                             <div class="info__head-vendorcode">Артикул: {{productData.vendorCode}}</div>
                         </div>
                         <div class="price">
-                            <p v-if="productData.priceProduct.value.length > 0" class="price__text--strike"><strike>{{productData.priceProduct.value}}</strike><sub>{{productData.priceProduct.currency}}</sub></p>
-                            <p class="price__text">{{productData.productPriceDiscount.value}}<sub>{{productData.productPriceDiscount.currency}}</sub></p>
+                            <p v-if="productData.priceProduct.value.length > 0" class="price__text--strike">{{productData.priceProduct.value}}<span>{{productData.priceProduct.currency}}</span></p>
+                            <p class="price__text">{{productData.productPriceDiscount.value}}<span>{{productData.productPriceDiscount.currency}}</span></p>
                         </div>
                         <div class="info__offer">
                             <h3 class="info__offer-title">Цвет:</h3>
@@ -24,7 +24,6 @@
                                     type="radio"
                                     name="color"
                                     class="colors__item"
-                                    :id="colorItem.id"
                                     v-model="selectionData.selectedСolor"
                                     :value="colorItem.value"
                                     @change="request(colorItem.id)"
@@ -69,7 +68,7 @@ export default {
     }
   },
   created: function () {  
-/*     this.axios.get("./static/colorsSelect.json").then((response) => {
+    /*  this.axios.get("./static/colorsSelect.json").then((response) => {
         this.selectionData = response.data;
         this.pending = false;
         console.log(this.selectionData);
@@ -119,7 +118,6 @@ body {
 
 input[type="radio"] {
     display: none;
-    
 }
 .colors__item {
     width: 30px;
@@ -139,8 +137,8 @@ input[type="radio"] {
         background-image: url('../../src/assets/images/check/check.svg');
         width: 12px;
         height: 12px;
-        right: -2px;
-        top: -2px;
+        right: -4px;
+        top: -4px;
         position: absolute;
         opacity: 0;
         transition: all .2s;
@@ -157,6 +155,7 @@ input[type="radio"] {
     font-family: 'Roboto', sans-serif;
     &__wrapper {
         display: flex;
+        justify-content: center;
     }
     &__buy {
         display: block;
@@ -175,6 +174,7 @@ input[type="radio"] {
         position: relative;
         padding-left: 20px;
         box-sizing: border-box;
+        font-family: 'Balsamiq Sans', cursive;
         &::before {
             content: '';
             position: absolute;
@@ -195,6 +195,7 @@ input[type="radio"] {
     justify-content: space-between;
     align-items: center; 
     width: 100%;
+    margin-bottom: 30px;
     }
     &__head-instock {
         padding: 5px 15px;
@@ -253,21 +254,34 @@ input[type="radio"] {
         font-size: 30px;
         line-height: 100%;
         text-transform: uppercase;
-        sub {
+        &, &--strike {
+            margin: 0;
+            margin-bottom: 30px;
+        }
+        
+        span {
             font-size: 14px;
             line-height: 100%;
             font-family: 'Roboto', sans-serif;
         }
         &--strike {
             color: #828282;
-
             font-weight: bold;
             font-size: 20px;
             line-height: 100%;
             text-transform: uppercase;
             color: #828282;
-            sub {
-                font-size: 14px;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                background: #000;
+                top: 8px;
+            }
+            span {
+                font-size: 12px;
                 line-height: 100%;
                 font-family: 'Roboto', sans-serif;
             }
@@ -282,36 +296,39 @@ input[type="radio"] {
 
 </style>
 <style lang="scss">
-.slick-next:before {
-    width: 31px;
-    height: 32px;
-    display: block;
-    content: url('../../src/assets/images/arrow-right.svg');
-    font-family: 'Roboto', sans-serif;
-    background: #F5F5F5;
-    opacity: 0.5;
-    border-radius: 20px 0px 0px 20px;
-    padding: 7px 0 0px 5px;
-    box-sizing: border-box;
-}
-.slick-prev::before {
-    width: 31px;
-    height: 32px;
-    display: block;
-    content: url('../../src/assets/images/arrow-left.svg');
-    font-family: 'Roboto', sans-serif;
-    background: #F5F5F5;
-    opacity: 0.5;
-    border-radius: 0px 20px 20px 0px;
-    padding: 7px 0 0px 0px;
-    box-sizing: border-box;
-}
-.slick-next {
-    right: 10px;
-}
+.kidsanna {
+    .slick-next:before {
+        width: 31px;
+        height: 32px;
+        display: block;
+        content: url('../../src/assets/images/arrow-right.svg');
+        font-family: 'Roboto', sans-serif;
+        background: #F5F5F5;
+        opacity: 0.5;
+        border-radius: 20px 0px 0px 20px;
+        padding: 7px 0 0px 5px;
+        box-sizing: border-box;
+    }
+    .slick-prev::before {
+        width: 31px;
+        height: 32px;
+        display: block;
+        content: url('../../src/assets/images/arrow-left.svg');
+        font-family: 'Roboto', sans-serif;
+        background: #F5F5F5;
+        opacity: 0.5;
+        border-radius: 0px 20px 20px 0px;
+        padding: 7px 0 0px 0px;
+        box-sizing: border-box;
+    }
+    .slick-next {
+        right: 10px;
+        z-index: 1;
+    }
 
-.slick-prev {
-    left: 0px;
-    z-index: 1;
+    .slick-prev {
+        left: 0px;
+        z-index: 1;
+    }
 }
 </style>
