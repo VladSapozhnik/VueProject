@@ -14,7 +14,7 @@
                             <div class="info__head-vendorcode">Артикул: {{productData.vendorCode}}</div>
                         </div>
                         <div class="price">
-                            <p class="price__text--strike"><strike>{{productData.priceProduct.value}}</strike><sub>{{productData.priceProduct.currency}}</sub></p>
+                            <p v-if="productData.priceProduct.value.length > 0" class="price__text--strike"><strike>{{productData.priceProduct.value}}</strike><sub>{{productData.priceProduct.currency}}</sub></p>
                             <p class="price__text">{{productData.productPriceDiscount.value}}<sub>{{productData.productPriceDiscount.currency}}</sub></p>
                         </div>
                         <div class="info__offer">
@@ -129,7 +129,6 @@ input[type="radio"] {
     box-sizing: border-box;
     position: relative;
     cursor: pointer;
-    margin-right: 5px;
     &:checked + & {
         width: 30px;
         height: 30px;
@@ -171,7 +170,7 @@ input[type="radio"] {
         color: #FFFFFF;
         transition: all .2s;
         cursor: pointer;
-        background: red;
+        background: #F04137;
         border: 1px solid transparent;
         position: relative;
         padding-left: 20px;
@@ -231,6 +230,10 @@ input[type="radio"] {
             margin: 0 0 20px 0;
         }
     }
+
+    label + label {
+        margin-left: 5px;
+    }
 }
 
 .price {
@@ -250,7 +253,6 @@ input[type="radio"] {
         font-size: 30px;
         line-height: 100%;
         text-transform: uppercase;
-        margin: 30px 0;
         sub {
             font-size: 14px;
             line-height: 100%;
@@ -258,7 +260,7 @@ input[type="radio"] {
         }
         &--strike {
             color: #828282;
-            margin-right: 20px;
+
             font-weight: bold;
             font-size: 20px;
             line-height: 100%;
@@ -270,6 +272,9 @@ input[type="radio"] {
                 font-family: 'Roboto', sans-serif;
             }
         }
+    }
+    &__text--strike + &__text {
+        margin-left: 20px;
     }
 }
 
