@@ -96,7 +96,7 @@ export default {
 <style scoped lang='scss'>
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Roboto:wght@400;500&display=swap');
 body {
-    background: #F5F5F5;
+    background: #fff;
 }
 
 .container {
